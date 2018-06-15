@@ -1,0 +1,319 @@
+﻿<!DOCTYPE HTML>
+<html>
+{% load staticfiles %}
+<head>
+<title>门诊挂号系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="{% static 'css/style3.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+<!-- jQuery -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!----webfonts--->
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!---//webfonts--->  
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<div id="wrapper">
+     <!-- Navigation -->
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">门诊挂号系统</a>
+            </div>
+            <!-- /.navbar-header -->
+	    <!--
+            <ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+	        		<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-comments-o"></i><span class="badge">4</span></a>
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header">
+							<strong>Messages</strong>
+							<div class="progress thin">
+							  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+							    <span class="sr-only">40% Complete (success)</span>
+							  </div>
+							</div>
+						</li>
+						<li class="avatar">
+							<a href="#">
+								<img src="images/1.png" alt=""/>
+								<div>姓名</div>
+								<small>1 minute ago</small>
+								<span class="label label-info">NEW</span>
+							</a>
+						</li>
+						<li class="avatar">
+							<a href="#">
+								<img src="images/2.png" alt=""/>
+								<div>New message</div>
+								<small>1 minute ago</small>
+								<span class="label label-info">NEW</span>
+							</a>
+						</li>
+						<li class="avatar">
+							<a href="#">
+								<img src="images/3.png" alt=""/>
+								<div>New message</div>
+								<small>1 minute ago</small>
+							</a>
+						</li>
+						<li class="avatar">
+							<a href="#">
+								<img src="images/4.png" alt=""/>
+								<div>New message</div>
+								<small>1 minute ago</small>
+							</a>
+						</li>
+						<li class="avatar">
+							<a href="#">
+								<img src="images/5.png" alt=""/>
+								<div>New message</div>
+								<small>1 minute ago</small>
+							</a>
+						</li>
+						<li class="avatar">
+							<a href="#">
+								<img src="images/pic1.png" alt=""/>
+								<div>New message</div>
+								<small>1 minute ago</small>
+							</a>
+						</li>
+						<li class="dropdown-menu-footer text-center">
+							<a href="#">View all messages</a>
+						</li>	
+	        		</ul>
+	      		</li>
+			    <li class="dropdown">
+	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="images/1.png" alt=""/><span class="badge">9</span></a>
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header text-center">
+							<strong>Account</strong>
+						</li>
+						<li class="m_2"><a href="#"><i class="fa fa-bell-o"></i> Updates <span class="label label-info">42</span></a></li>
+						<li class="m_2"><a href="#"><i class="fa fa-envelope-o"></i> Messages <span class="label label-success">42</span></a></li>
+						<li class="m_2"><a href="#"><i class="fa fa-tasks"></i> Tasks <span class="label label-danger">42</span></a></li>
+						<li><a href="#"><i class="fa fa-comments"></i> Comments <span class="label label-warning">42</span></a></li>
+						<li class="dropdown-menu-header text-center">
+							<strong>Settings</strong>
+						</li>
+						<li class="m_2"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+						<li class="m_2"><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
+						<li class="m_2"><a href="#"><i class="fa fa-usd"></i> Payments <span class="label label-default">42</span></a></li>
+						<li class="m_2"><a href="#"><i class="fa fa-file"></i> Projects <span class="label label-primary">42</span></a></li>
+						<li class="divider"></li>
+						<li class="m_2"><a href="#"><i class="fa fa-shield"></i> Lock Profile</a></li>
+						<li class="m_2"><a href="#"><i class="fa fa-lock"></i> Logout</a></li>	
+	        		</ul>
+	      		</li>
+			</ul>
+			<form class="navbar-form navbar-right">
+              <input type="text" class="form-control" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
+	    </form>	-->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+<!--
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw nav_icon"></i>首页</a>
+                        </li>
+-->
+<!--
+                        <li>
+                            <a href="#"><i class="fa fa-laptop nav_icon"></i>Layouts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="grids.html">Grid System</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+<!--
+                        <li>
+                            <a href="#"><i class="fa fa-indent nav_icon"></i>Menu Levels<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="graphs.html">Graphs</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+<!--
+                        <li>
+                            <a href="#"><i class="fa fa-envelope nav_icon"></i>Mailbox<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="inbox.html">Inbox</a>
+                                </li>
+                                <li>
+                                    <a href="compose.html">Compose email</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+<!--
+                        <li>
+                            <a href="widgets.html"><i class="fa fa-flask nav_icon"></i>Widgets</a>
+                        </li>
+-->
+                         <li>
+                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>挂号管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:patient_sign' %}">挂号</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'his06:patient_reg' %}">新建病人信息</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>信息查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:patient_check' %}">病人信息查询/修改</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>用户状态<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'logout' %}">注销</a>
+                                </li>
+<!--
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+-->
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+        <div class="col-md-12 graphs">
+	   <div class="xs">
+  	    <div class="well1 white">
+<!--
+        <form class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
+          <fieldset>
+            <div class="form-group">
+              <label class="control-label">姓名</label>
+              <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label">联系方式</label>
+              <input type="email" class="form-control1 ng-invalid ng-valid-email ng-invalid-required ng-touched" ng-model="model.email" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Password</label>
+              <input type="password" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.password" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Url</label>
+              <input type="url" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="">
+            </div>
+            <div class="form-group">
+              <label class="control-label">Number</label>
+              <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
+              <p class="help-block hint-block">Numeric values from 0-***</p>
+            </div>
+            <div class="form-group">
+              <label class="control-label normal">日期</label>
+              <input type="date" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.date" required="">
+            </div>
+            <div class="form-group">
+              <div class="checkbox1">
+                <label>
+                  <input type="checkbox" ng-model="model.winner" required="" class="ng-invalid ng-invalid-required">
+                  你是S B么？
+                </label>
+              </div>
+            </div>
+            <div class="form-group filled">
+              <label class="control-label">Select</label>
+              <select class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required=""><option value="? undefined:undefined ?"></option>
+                <option value="Select a pirate">Select a pirate</option>
+                <option value="Monkey D. Luffy">Monkey D. Luffy</option>
+                <option value="Roronoa Zoro">Roronoa Zoro</option>
+                <option value="Tony Tony Chopper">Tony Tony Chopper</option>
+                <option value="Nico Robin">Nico Robin</option>
+                <option value="Bon Clay">Bon Clay</option>
+              </select>
+            </div>
+-->      <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="page-header">门诊医生挂号系统</h1>
+                        <p class="lead">系统概述</p>
+                        <p>主界面由3个部分组成，分别是门诊挂号工作站界面，门诊医生工作站界面及系统管理界面。</p>
+                        <p>门诊挂号工作站界面，用于实现挂号员对前来挂号的病人进行录入病人基本信息、办理相应的挂号业务及挂号收费的功能。</p>
+			            <p>门诊医生工作站界面，用于实现门诊医生按挂号顺序对就诊病人进行诊疗、开具处方及相关检验项目的功能。</p>
+                        <p>系统管理界面，用于实现系统管理员对系统中的产生的各类信息进行管理管理的功能。</p>
+                        <h3>门诊挂号系统</h3>
+                        <p>当前登陆系统为门诊挂号系统，系统功能是为病人进行挂号。</p>
+                        <p>点击左侧横线图标可进行功能操作。</p>
+                        <p>1.&nbsp挂号管理：可为病人进行挂号，填写相关信息。</p>
+                        <p>2.&nbsp病人信息管理</p>
+                        <p>&nbsp&nbsp&nbsp&nbspa.新建：新建病人病历</p>
+                        <p>&nbsp&nbsp&nbsp&nbspb.查询：根据病人诊疗卡号查询病人基本信息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">保存</button>
+              <button type="reset" class="btn btn-default">取消</button>
+            </div>
+          </fieldset>
+          -->
+        </form>
+      </div>
+    </div>
+    <div class="copy_layout">
+      <p>Copyright &copy; 2018.Company name All rights reserved.Create by Netbin.</p>
+   </div>
+   </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'js/metisMenu.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

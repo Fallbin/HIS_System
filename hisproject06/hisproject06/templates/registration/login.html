@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>登录</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-center">
+    <div class="container">
+        <div class="flex-center">
+            <div class="unit-1-2 unit-1-on-mobile">
+                <div align="center"><img src="{% static 'images/his04.png' %}"/>
+                <form class="form" action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {% if errors_mesage %}
+                    {{ errors_mesage }}
+                    {% endif %}
+                    <h2 class="text-center">门诊医生管理系统</h2>
+                    <div class="form-group">
+                        <!-- <label for="id_username">用户名：</label> -->
+                        <input type="text" name='username' class="form-control" id="id_username" placeholder="Username" autofocus required>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="id_password">密码：</label> -->
+                        <input type="password" name='password' class="form-control" id="id_password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">登录</button>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </form>
+                <div class="flex-left top-gap text-small">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

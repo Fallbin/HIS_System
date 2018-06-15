@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+{% load staticfiles %}
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>挂号系统</title>
+	<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+	<link rel="stylesheet" href="{%　static 'css/style2.css' %}">
+
+</head>
+<body>
+	
+	<div id="wrapper">
+        <div class="overlay"></div>
+    
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                       门诊挂号
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-home"></i> 首页</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-file-o"></i> 挂号管理</a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 病人信息管理<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">新建</a></li>
+                    <li><a href="#">查询</a></li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}"><i class="fa fa-fw fa-cog"></i> 注销登录</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="page-header">门诊医生挂号系统</h1>  
+                        <p class="lead">系统概述</p>
+                        <p>主界面由3个部分组成，分别是门诊挂号工作站界面，门诊医生工作站界面及系统管理界面。</p>
+                        <p>门诊挂号工作站界面，用于实现挂号员对前来挂号的病人进行录入病人基本信息、办理相应的挂号业务及挂号收费的功能。</p>
+			            <p>门诊医生工作站界面，用于实现门诊医生按挂号顺序对就诊病人进行诊疗、开具处方及相关检验项目的功能。</p>
+                        <p>系统管理界面，用于实现系统管理员对系统中的产生的各类信息进行管理管理的功能。</p>
+                        <h3>门诊挂号系统</h3>
+                        <p>当前登陆系统为门诊挂号系统，系统功能是为病人进行挂号。</p>
+                        <p>点击左侧横线图标可进行功能操作。</p>
+                        <p>1.&nbsp挂号管理：可为病人进行挂号，填写相关信息。</p>
+                        <p>2.&nbsp病人信息管理</p>
+                        <p>&nbsp&nbsp&nbsp&nbspa.新建：新建病人病历</p>
+                        <p>&nbsp&nbsp&nbsp&nbspb.查询：根据病人诊疗卡号查询病人基本信息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+		  var trigger = $('.hamburger'),
+		      overlay = $('.overlay'),
+		     isClosed = false;
+
+		    trigger.click(function () {
+		      hamburger_cross();      
+		    });
+
+		    function hamburger_cross() {
+
+		      if (isClosed == true) {          
+		        overlay.hide();
+		        trigger.removeClass('is-open');
+		        trigger.addClass('is-closed');
+		        isClosed = false;
+		      } else {   
+		        overlay.show();
+		        trigger.removeClass('is-closed');
+		        trigger.addClass('is-open');
+		        isClosed = true;
+		      }
+		  }
+		  
+		  $('[data-toggle="offcanvas"]').click(function () {
+		        $('#wrapper').toggleClass('toggled');
+		  });  
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,509 @@
+﻿<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/html">
+{% load staticfiles %}
+<head>
+<title>门诊挂号</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="{% static 'css/style3.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+<!-- jQuery -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!----webfonts--->
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!---//webfonts--->  
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<body>
+<div id="wrapper">
+     <!-- Navigation -->
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">门诊挂号系统</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                            <a href="{% url 'his06:nurse' %}"><i class="fa fa-check-square-o nav_icon"></i>信息管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">挂号</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'his06:patient_reg' %}">新建病人信息</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>信息查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:patient_check' %}">病人信息查询/修改</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>用户状态<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'logout' %}">注销</a>
+                                </li>
+<!--
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+-->
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+        <div class="graphs">
+	     <div class="xs">
+  	       <h3>病人挂号</h3>
+			 <div class="row">
+				<div class="span10">
+					<div class="slate">
+					</div>
+				</div>
+			</div>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" action="{% url 'his06:patient_sign' %}" method="post">
+                                {% csrf_token %}
+                                <div align="center" class="form-group">
+									{% if obj %}
+                                 	<input type="text" class="input-large" placeholder="诊疗卡号..." name="care_id" value={{ obj.care_id }} >
+									{% else %}
+									<input type="text" class="input-large" placeholder="诊疗卡号..." name="care_id">
+									{% endif %}
+									<button type="submit" class="btn btn-primary" >查询</button>
+                                </div>
+                                <div align="center" class="form-group">
+                                    {% if error %}
+                                    <label class="col-sm-7 control-label">{{ error }}</label>
+                                    {% endif %}
+                                </div>
+<!--startprint1-->
+                            </form>
+							<form class="form-horizontal" action="{% url 'his06:save_sign' %}" method="post">
+								{% csrf_token %}
+								<div class="form-group">
+									<label class="col-sm-2 control-label">当前诊疗卡号<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+									{% if obj %}
+                                 	<input class="form-control1" type="text"  placeholder="诊疗卡号..." name="care_id"  value={{ obj.care_id }} readonly="readonly">
+									{% endif %}
+									</div>
+                                </div>
+								<div class="form-group">
+                                    <label for="patient_name" class="col-sm-2 control-label">姓名<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+                                        {% if obj %}
+										<input type="text" class="form-control1" id="patient_name" name="patient_name" value={{ obj.name }} readonly="readonly">
+                                        {% endif %}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="patient_sex" class="col-sm-2 control-label">性别<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+                                        {% if obj %}
+										<input type="text" class="form-control1" id="patient_sex" name="patient_sex" value={{ obj.sex }} required readonly="readonly">
+                                        {% endif %}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="patient_id" class="col-sm-2 control-label">身份证号<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+                                        {% if obj %}
+										<input type="text" class="form-control1" id="patient_id" name="patient_id" value={{ obj.id_num }} required readonly="readonly">
+                                        {% endif %}
+									</div>
+								</div>
+								<!--
+								<div class="form-group">
+									<label for="patient_birth" class="col-sm-2 control-label">出生日期</label>
+									<div class="col-sm-8">
+                                        {% if obj %}
+										<input type="text" class="form-control1" id="patient_birth" name="patient_birth" value={{ obj.birth }}  required>
+                                        {% endif %}
+									</div>
+								</div>
+								<script>
+									var dateStr = document.getElementById('patient_birth')
+									window.onload=function(dateStr){
+										alert(dateStr)
+										dateStr = dateStr.replace('年','-');
+    									dateStr = dateStr.replace('月','-');
+    									dateStr = dateStr.replace('日','-');
+    									document.getElementById('patient_birth').value = dateStr
+									}
+								</script>
+								-->
+								<div class="form-group">
+									<label for="patient_phone" class="col-sm-2 control-label">联系方式<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+                                        {% if obj %}
+										<input type="text" class="form-control1" id="patient_phone" name="patient_phone" value={{ obj.phone_num }} required="联系方式不能为空" readonly="readonly">
+                                        {% endif %}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="patient_address" class="col-sm-2 control-label">家庭住址<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+                                        {% if obj %}
+										<input type="text" class="form-control1" id="patient_address" name="patient_address" value={{ obj.address }} required="家庭住址不能为空" readonly="readonly">
+                                        {% endif %}
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="sign_time" class="col-sm-2 control-label">挂号日期<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="date" class="form-control1" id="sign_time" name="sign_time" onblur="time_choice()" required="挂号日期不能为空">
+									</div>
+								</div>
+								<script>
+								function time_choice(){
+									var the_time = document.getElementById("sign_time").value;
+									var d=new Date(Date.parse(the_time.replace(/-/g,"/")));
+									d.setDate(d.getDate());
+									var to_day = new Date()
+									to_day.setDate(to_day.getDate()-1)
+									if(d < to_day){
+										alert("不能选择过去的时间！")
+										document.getElementById("sign_time").value = "";
+									}
+
+								}
+								</script>
+								<div class="form-group">
+            						<label for="super" class="col-sm-2 control-label">科室类型<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+            						<select class="form-control1" id="super" name="super">
+                						<option selected="selected">请选择</option>
+										{% for item in super %}
+										<option value="{{ item.super_id }}">{{ item.super_name }}</option>
+                						{% endfor %}
+            						</select>
+									</div>
+								</div>
+								<div class="form-group">
+            						<label for="department" class="col-sm-2 control-label">挂号科室<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+            						<select class="form-control1" id="department" name="department" required="挂号科室不能为空">
+                						<option selected="selected">请选择</option>
+            						</select>
+									</div>
+								</div>
+								<script>
+									$('#super').change(function(){
+										var id = $('#super').val();
+										$.getJSON("{% url 'his06:get_department' %}?pk="+id, function(data,textStatus){
+											var content='';
+											content+='<option selected="selected">请选择</option>'
+											$.each(data, function(i, item){
+												   content+='<option value='+item.pk+'>'+item.fields.department_name+'</option>'
+											});
+											$('#department').html(content)
+										});
+									});
+    							</script>
+								<div class="form-group">
+            						<label for="level" class="col-sm-2 control-label">医生职称<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+            						<select class="form-control1" id="level" name="level" required="医生职称不能为空">
+                						<option selected="selected">请选择</option>
+            						</select>
+									</div>
+								</div>
+								<script>
+								$('#department').change(function(){
+										var id = $('#department').val();
+										$.getJSON("{% url 'his06:get_level' %}?pk="+id, function(data,textStatus){
+											var content='';
+											content+='<option selected="selected">请选择</option>'
+											$.each(data, function(i, item){
+												if(item.fields._level == "0"){
+													content+='<option value='+item.fields._level+'>医生</option>';
+												}else if(item.fields._level == "1"){
+													content+='<option value='+item.fields._level+'>主任医师</option>';
+												}else if(item.fields._level == "4"){
+													content+='<option value='+item.fields._level+'>科副主任</option>';
+												}else if(item.fields._level == "5"){
+													content+='<option value='+item.fields._level+'>科主任</option>';
+												}else if(item.fields._level == "6"){
+													content+='<option value='+item.fields._level+'>住院医师</option>';
+												}else if(item.fields._level == "8"){
+													content+='<option value='+item.fields._level+'>主治医师</option>';
+												}else if(item.fields._level == "9"){
+													content+='<option value='+item.fields._level+'>副主任医师</option>';
+												}
+											});
+											$('#level').html(content)
+										});
+									});
+								</script>
+								<div class="form-group">
+            						<label for="doc_name" class="col-sm-2 control-label">医生姓名<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+            						<select class="form-control1" id="doc_name" name="doc_name" required="医生姓名不能为空">
+                						<option selected="selected">请选择</option>
+            						</select>
+									</div>
+								</div>
+								<script>
+									$('#level').change(function(){
+										var id = $('#level').val();
+										var department = $('#department').val();
+										var my_date = document.getElementById("sign_time").value;
+										var data = {id: id, my_date: my_date};
+
+										$.getJSON("{% url 'his06:get_doc_name' %}?dep="+department, data, function(data,textStatus){
+											var content='';
+
+											content+='<option selected="selected">请选择</option>'
+											$.each(data, function(i, item){
+												   content+='<option value='+item.fields.username+'>'+item.fields.name+'</option>'
+											});
+											$('#doc_name').html(content)
+										});
+									});
+								</script>
+								<script>
+									$('#doc_name').change(function(){
+										var id = $('#doc_name').val();
+
+										$.getJSON("{% url 'his06:get_sex' %}?pk="+id, function(data,textStatus){
+											var content='';
+											$.each(data, function(i, item){
+												$("#all_money").val(item.fields.money);
+											});
+										});
+									});
+								</script>
+								<!--　这个房间号无法存储到数据库中 -->
+								<div class="form-group">
+									<label for="room" class="col-sm-2 control-label">就诊房间<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="room" name="room" required="就诊房间不能为空" readonly="readonly">
+									</div>
+								</div>
+								<script>
+									$('#doc_name').change(function(){
+										var id = $('#doc_name').val();
+
+										$.getJSON("{% url 'his06:get_room' %}?pk="+id, function(data,textStatus){
+											var content='';
+											$.each(data, function(i, item){
+												$("#room").val(item.fields.room);
+											});
+										});
+									});
+								</script>
+								<div class="form-group">
+									<label for="doc_sex" class="col-sm-2 control-label">医生性别<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="doc_sex" name="doc_sex" required="医生性别不能为空" readonly="readonly">
+									</div>
+								</div>
+								<script>
+									$('#doc_name').change(function(){
+										var id = $('#doc_name').val();
+
+										$.getJSON("{% url 'his06:get_sex' %}?pk="+id, function(data,textStatus){
+											var content='';
+											$.each(data, function(i, item){
+												$("#doc_sex").val(item.fields.sex);
+											});
+										});
+									});
+								</script>
+								<div class="form-group">
+            						<label for="sign_kind" class="col-sm-2 control-label">挂号号别<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+            						<select class="form-control1" id="sign_kind" name="sign_kind" onchange="change1()">
+                						<option value="0">普通</option>
+										<option value="5">急诊</option>
+										<option value="8">特诊</option>
+            						</select>
+									</div>
+								</div>
+								<script>
+									var val = document.getElementById("sign_kind").value;
+								</script>
+								<script>
+									function change1(){
+										var a = document.getElementById("sign_kind").value;
+										var b = document.getElementById("all_money").value;
+										if(b != ""){
+											if(val == "普通" || val == "0"){
+												document.getElementById("all_money").value = parseInt(a) + parseInt(b);
+											}else if(val == "5" && a == "0"){
+												document.getElementById("all_money").value = parseInt(b) - 5;
+											}else if(val == "5" && a == "8"){
+												document.getElementById("all_money").value = parseInt(b) + 3;
+											}else if(val == "8" && a == "0"){
+												document.getElementById("all_money").value = parseInt(b) - 8;
+											}else if(val == "8" && a == "5"){
+												document.getElementById("all_money").value = parseInt(b) - 3;
+											}
+											val = a;
+											return true;
+										}else{
+											alert("请先选择医生！")
+											return false;
+										}
+									}
+								</script>
+								<div class="form-group">
+            						<label for="take_book" class="col-sm-2 control-label">是否购买病历<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+            						<select class="form-control1" id="take_book" name="take_book" onchange="change2()">
+                						<option selected="selected"　value="0">否</option>
+										<option value="1">是</option>
+            						</select>
+									</div>
+								</div>
+								<script>
+									function change2(){
+										var a = document.getElementById("take_book").value;
+										var b = document.getElementById("all_money").value;
+										if(a != "否"){
+											document.getElementById("all_money").value = parseInt(a) + parseInt(b);
+										}else{
+											document.getElementById("all_money").value = parseInt(b) - 1;
+										}
+									}
+								</script>
+
+								<div class="form-group">
+									<label for="all_money" class="col-sm-2 control-label">应缴金额<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="all_money" name="all_money" required="应缴金额不能为空" readonly="readonly">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="pay_money" class="col-sm-2 control-label">实付金额<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="pay_money" name="pay_money" onblur="pay()" onkeyup="if(isNaN(value))execCommand('undo')" onafterpaste="if(isNaN(value))execCommand('undo')" required="实付金额不能为空">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="ret_money" class="col-sm-2 control-label">找回金额<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="ret_money" name="ret_money" required="找回金额不能为空" readonly="readonly">
+									</div>
+								</div>
+								<script>
+									function pay(){
+										var mon = document.getElementById("pay_money").value
+										var mon2 = document.getElementById("all_money").value
+										if(mon == "0"){
+											alert("实付金额不能为0!")
+										}else if(parseFloat(mon) < parseFloat(mon2) && mon2 != ""){
+											alert("所付金额小于应付金额!")
+										}else if(mon2 != ""){
+											document.getElementById("ret_money").value = parseFloat(mon) - parseFloat(mon2)
+										}else if(mon2 == ""){
+											alert("请先选择前面的项目！")
+											document.getElementById("pay_money").value = ""
+										}
+
+									}
+								</script>
+								<div class="form-group">
+									<label for="water_id" class="col-sm-2 control-label">流水号<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="water_id" name="water_id" required="流水号不能为空" readonly="readonly">
+									</div>
+								</div>
+								<!-- 原本Json数据无法返回 alert(JSON.stringify(item)); 可以用这个语句进行调试 -->
+								<script>
+									window.onload = function(){
+										$.getJSON("{% url 'his06:get_water_num' %}",function(data){
+											$.each(data, function(index, item){
+												$("#water_id").val(item.pk);
+											});
+										});
+									};
+								</script>
+								<div class="form-group">
+									<label for="care_num" class="col-sm-2 control-label">诊疗序号<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="care_num" name="care_num" required="诊疗序号不能为空" readonly="readonly">
+									</div>
+								</div>
+								<!-- 所选医生的全部病号减去剩余病号+1得到诊疗序号 -->
+								<script>
+									$('#doc_name').change(function(){
+										var id = $('#doc_name').val();
+
+										$.getJSON("{% url 'his06:get_sex' %}?pk="+id, function(data,textStatus){
+											$.each(data, function(i, item){
+												$("#care_num").val(item.fields.num_all - item.fields.num_left + 1);
+											});
+										});
+									});
+								</script>
+								<div class="panel-footer">
+									<div align="center" col-sm-8 col-sm-offset-2">
+										<button class="btn-success btn" type="submit" onclick="success()">确认</button>
+										<button class="btn-default btn" type="reset">取消</button>
+										<button class="btn-printer btn" onclick="preview()">打印</button>
+									</div>
+								</div>
+				 				<script>
+									function preview(oper){
+										if (oper < 10){
+										bdhtml=window.document.body.innerHTML;//获取当前页的html代码
+										sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域
+										eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域
+										prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html
+										prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html
+										window.document.body.innerHTML=prnhtml;
+										window.print();
+										window.document.body.innerHTML=bdhtml;
+										}
+										else {
+											window.print();
+										}
+									}
+								</script>
+							</form>
+						</div>
+					</div>
+ <!--endprint1-->
+  <div class="copy_layout">
+      <p>Copyright &copy; 2018.Company name All rights reserved.Create by Netbin.</p>
+  </div>
+  </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'js/metisMenu.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

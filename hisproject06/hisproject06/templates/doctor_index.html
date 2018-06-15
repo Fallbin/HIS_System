@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+{% load staticfiles %}
+<head>
+<title>门诊挂号系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="{% static 'css/style3.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+<!-- jQuery -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!----webfonts--->
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!---//webfonts--->
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'DataTables/datatables.min.css' %}"/>
+<script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+</head>
+<body>
+<div id="wrapper">
+     <!-- Navigation -->
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">门诊挂号系统</a>
+            </div>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                         <li>
+                            <a href="#"><i class="fa fa-check-square-o nav_icon"></i>门诊管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:doc_check' %}">门诊处理</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>信息查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:doc_work_time' %}">排班信息查询</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>用户状态<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'logout' %}">注销</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+        <div class="col-md-12 graphs">
+	   <div class="xs">
+  	    <div class="well1 white">
+
+         <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <h1 class="page-header">门诊医生挂号系统</h1>
+                        <p class="lead">系统概述</p>
+                        <p>主界面由3个部分组成，分别是门诊挂号工作站界面，门诊医生工作站界面及系统管理界面。</p>
+                        <p>门诊挂号工作站界面，用于实现挂号员对前来挂号的病人进行录入病人基本信息、办理相应的挂号业务及挂号收费的功能。</p>
+			            <p>门诊医生工作站界面，用于实现门诊医生按挂号顺序对就诊病人进行诊疗、开具处方及相关检验项目的功能。</p>
+                        <p>系统管理界面，用于实现系统管理员对系统中的产生的各类信息进行管理管理的功能。</p>
+                        <h3>门诊医生系统</h3>
+                        <p>当前登陆系统为门诊医生系统，系统功能是为挂号病人进行诊疗。</p>
+                        <p>点击左侧横线图标可进行功能操作。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">保存</button>
+              <button type="reset" class="btn btn-default">取消</button>
+            </div>
+          </fieldset>
+          -->
+        </form>
+      </div>
+    </div>
+    <div class="copy_layout">
+      <p>Copyright &copy; 2018.Company name All rights reserved.Create by Netbin.</p>
+   </div>
+   </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'js/metisMenu.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

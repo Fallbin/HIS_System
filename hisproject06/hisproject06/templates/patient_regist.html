@@ -1,0 +1,605 @@
+<!DOCTYPE HTML>
+<html>
+{% load staticfiles %}
+<head>
+<title>新建病人信息</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="{% static 'css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="{% static 'css/style3.css' %}" rel='stylesheet' type='text/css' />
+<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+<!-- jQuery -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!----webfonts--->
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!---//webfonts--->
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+<div id="wrapper">
+     <!-- Navigation -->
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">门诊挂号系统</a>
+            </div>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                            <a href="{% url 'his06:nurse' %}"><i class="fa fa-check-square-o nav_icon"></i>信息管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:patient_sign' %}">挂号</a>
+                                </li>
+                                <li>
+                                    <a href="#">新建病人信息</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-table nav_icon"></i>信息查询<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'his06:patient_check' %}">病人信息查询/修改</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>用户状态<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{% url 'logout' %}">注销</a>
+                                </li>
+<!--
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+-->
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+        <div class="graphs">
+	     <div class="xs">
+  	       <h3>新建病人信息</h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" action="{% url 'his06:patient_reg' %}" method="post">
+								{% csrf_token %}
+								<!--
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">Focused Input</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="focusedinput" placeholder="Default Input">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block">Your help text!</p>
+									</div>
+								</div>
+								-->
+								<div class="form-group">
+									<label for="care_id" class="col-sm-2 control-label">诊疗卡号<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="care_id" name="care_id" required="诊疗卡号不能为空" readonly="readonly" >
+									</div>
+								</div>
+								<script>
+									var time = new Date()
+									var str = time.getFullYear() + '0' + (time.getMonth()+1) + time.getDate() + Math.floor(Math.random() * (999999 - 100000) + 100000);
+									window.onload = function(){
+										var psel = document.getElementById("care_id");
+										$.getJSON("{% url 'his06:get_id_num' %}", function(data,textStatus){
+										$.each(data, function(i, item){
+											if(name == item.fields.care_id){
+												str = time.getFullYear() + '0' + (time.getMonth()+1) + time.getDate() + Math.floor(Math.random() * (999999 - 100000) + 100000)
+											}
+										});
+									});
+										psel.value = str; //设置
+									};
+								</script>
+								<!--
+								<div class="form-group">
+									<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+									<div class="col-sm-8">
+										<input type="password" class="form-control1" id="inputPassword" placeholder="Password">
+									</div>
+								</div>
+								-->
+								<div class="form-group">
+									<label for="name" class="col-sm-2 control-label">姓名<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="name" name="name" required="姓名不能为空" onblur="checkName()">
+									</div>
+								</div>
+								<script>
+								function checkName(){
+									var name = document.getElementById('name').value;
+									var testName = /^[\u4E00-\u9FA5A-Za-z]+$/
+									if(testName.test(name) == false){
+										alert("姓名输入不合法！")
+										document.getElementById('name').value = ""
+									}
+								}
+								</script>
+								<!--
+								<div class="form-group">
+									<label for="checkbox" class="col-sm-2 control-label">Checkbox</label>
+									<div class="col-sm-8">
+										<div class="checkbox-inline1"><label><input type="checkbox"> Unchecked</label></div>
+										<div class="checkbox-inline1"><label><input type="checkbox" checked=""> Checked</label></div>
+										<div class="checkbox-inline1"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>
+										<div class="checkbox-inline1"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="checkbox" class="col-sm-2 control-label">Checkbox Inline</label>
+									<div class="col-sm-8">
+										<div class="checkbox-inline"><label><input type="checkbox"> Unchecked</label></div>
+										<div class="checkbox-inline"><label><input type="checkbox" checked=""> Checked</label></div>
+										<div class="checkbox-inline"><label><input type="checkbox" disabled=""> Disabled Unchecked</label></div>
+										<div class="checkbox-inline"><label><input type="checkbox" disabled="" checked=""> Disabled Checked</label></div>
+									</div>
+								</div>
+								-->
+								<div class="form-group">
+									<label for="selector1" class="col-sm-2 control-label">性别<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<select id="selector1" class="form-control1" name="sex" required="性别不能为空">
+											<option value="male">男</option>
+											<option value="female">女</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="id_num" class="col-sm-2 control-label">身份证号<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="id_num" name="id_num" onblur="checkID()" required="身份证号不能为空">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="birth" class="col-sm-2 control-label">出生日期<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="date" class="form-control1" id="birth" name="birth" readonly="readonly" required>
+									</div>
+								</div>
+								<script>
+								function checkID(){
+									var test = 1
+									var name = document.getElementById('id_num').value;
+									var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+									var birthday = ""
+									var idCard = document.getElementById('id_num').value;
+									if(idCard != null && idCard != ""){
+										if(idCard.length == 15){
+											birthday = "19"+idCard.substr(6,6);
+										} else if(idCard.length == 18){
+											birthday = idCard.substr(6,8);
+										}
+										birthday = birthday.replace(/(.{4})(.{2})/,"$1-$2-");
+										document.getElementById('birth').value = birthday
+									}
+									if(p.test(name) == false && name != ""){
+										alert("身份证输入不合法");
+										document.getElementById('id_num').value = "";
+										document.getElementById('birth').value = "";
+									}
+									$.getJSON("{% url 'his06:get_id_num' %}", function(data,textStatus){
+										$.each(data, function(i, item){
+											if(name == item.fields.id_num){
+												test = 0
+												document.getElementById('birth').value = "";
+												document.getElementById('id_num').value = "";
+											}else{
+												test = 1
+											}
+										});
+										if(!test){alert("该身份证号已经存在！");}
+									});
+								}
+								</script>
+								<div class="form-group">
+									<label for="phone" class="col-sm-2 control-label">联系方式<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="phone" name="phone_num" onblur="checkPhone()" required>
+									</div>
+								</div>
+								<script>
+								function checkPhone(){
+									var phone = document.getElementById('phone').value;
+									if(!(/^1[34578]\d{9}$/.test(phone))){
+										alert("手机号码有误，请重填");
+										return false;
+									}
+								}
+								</script>
+								<div class="form-group">
+									<label for="address" class="col-sm-2 control-label">家庭住址<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="address" name="address" required>
+									</div>
+								</div>
+								<script>
+								function checkAddress(){
+									var name = document.getElementById('address').value;
+									if(name == ""){
+										alert("请填写家庭住址！");
+										return false;
+									}
+								}
+								</script>
+								<div class="form-group">
+									<label for="selector1" class="col-sm-2 control-label">国籍<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<select id="selector2" class="form-control1" name="nation" required>
+											<option value="0">中国</option>
+											<option value="1">美国</option>
+											<option value="2">英国</option>
+											<option value="3">韩国</option>
+											<option value="4">朝鲜</option>
+											<option value="5">日本</option>
+											<option value="6">印度尼西亚</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="selector1" class="col-sm-2 control-label">婚姻状况<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<select id="selector3" class="form-control1" name="marriage" required>
+											<option value="0">否</option>
+											<option value="1">是</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="job" class="col-sm-2 control-label">工作<img src="{% static 'images/star.png' %}"/></label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="job" name="job" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="parent_name" class="col-sm-2 control-label">监护人姓名</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="parent_name" name="parent_name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="parent_real" class="col-sm-2 control-label">与本人关系</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="parent_real" name="parent_real">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="parent_phone" class="col-sm-2 control-label">监护人联系方式</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="parent_phone" name="parent_phone">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="allergy" class="col-sm-2 control-label">药物过敏史</label>
+									<div class="col-sm-8">
+									<textarea rows="3" cols="82" id="allergy" name="allergy"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="sickhis" class="col-sm-2 control-label">既往病史</label>
+									<div class="col-sm-8">
+									<textarea rows="3" cols="82" id="sickhis" name="sickhis"></textarea>
+									</div>
+								</div>
+								<!--
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Multiple Select</label>
+									<div class="col-sm-8">
+										<select multiple="" class="form-control1">
+											<option>Option 1</option>
+											<option>Option 2</option>
+											<option>Option 3</option>
+											<option>Option 4</option>
+											<option>Option 5</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="txtarea1" class="col-sm-2 control-label">Textarea</label>
+									<div class="col-sm-8"><textarea name="txtarea1" id="txtarea1" cols="50" rows="4" class="form-control1"></textarea></div>
+								</div>
+								<div class="form-group">
+									<label for="radio" class="col-sm-2 control-label">Radio</label>
+									<div class="col-sm-8">
+										<div class="radio block"><label><input type="radio"> Unchecked</label></div>
+										<div class="radio block"><label><input type="radio" checked=""> Checked</label></div>
+										<div class="radio block"><label><input type="radio" disabled=""> Disabled Unchecked</label></div>
+										<div class="radio block"><label><input type="radio" disabled="" checked=""> Disabled Checked</label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="radio" class="col-sm-2 control-label">Radio Inline</label>
+									<div class="col-sm-8">
+										<div class="radio-inline"><label><input type="radio"> Unchecked</label></div>
+										<div class="radio-inline"><label><input type="radio" checked=""> Checked</label></div>
+										<div class="radio-inline"><label><input type="radio" disabled=""> Disabled Unchecked</label></div>
+										<div class="radio-inline"><label><input type="radio" disabled="" checked=""> Disabled Checked</label></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="smallinput" class="col-sm-2 control-label label-input-sm">Small Input</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1 input-sm" id="smallinput" placeholder="Small Input">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="mediuminput" class="col-sm-2 control-label">Medium Input</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1" id="mediuminput" placeholder="Medium Input">
+									</div>
+								</div>
+								<div class="form-group mb-n">
+									<label for="largeinput" class="col-sm-2 control-label label-input-lg">Large Input</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control1 input-lg" id="largeinput" placeholder="Large Input">
+									</div>
+								</div>
+								-->
+								<div class="panel-footer">
+									<div class="col-sm-8 col-sm-offset-2">
+										<button class="btn-success btn" type="submit">提交</button>
+										<button class="btn-default btn" type="reset">取消</button>
+										<!--<button class="btn-inverse btn">Reset</button>-->
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+			 <!--
+			 <div class="bs-example" data-example-id="form-validation-states">
+				<form>
+				  <div class="form-group has-success">
+					<label class="control-label" for="inputSuccess1">Input with success</label>
+					<input type="text" class="form-control1" id="inputSuccess1">
+				  </div>
+				  <div class="form-group has-warning">
+					<label class="control-label" for="inputWarning1">Input with warning</label>
+					<input type="text" class="form-control1" id="inputWarning1">
+				  </div>
+				  <div class="form-group has-error">
+					<label class="control-label" for="inputError1">Input with error</label>
+					<input type="text" class="form-control1" id="inputError1">
+				  </div>
+				</form>
+ 			 </div>
+  					<div class="panel-body">
+					<form role="form" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-md-2 control-label">Email Address</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="fa fa-envelope-o"></i>
+									</span>
+									<input type="text" class="form-control1" placeholder="Email Address">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Password</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="fa fa-key"></i>
+									</span>
+									<input type="password" class="form-control1" id="exampleInputPassword1" placeholder="Password">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Email Address</label>
+							<div class="col-md-8">
+								<div class="input-group input-icon right">
+									<span class="input-group-addon">
+										<i class="fa fa-envelope-o"></i>
+									</span>
+									<input id="email" class="form-control1" type="text" placeholder="Email Address">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">With tooltip</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Password</label>
+							<div class="col-md-8">
+								<div class="input-group input-icon right">
+									<span class="input-group-addon">
+										<i class="fa fa-key"></i>
+									</span>
+									<input type="password" class="form-control1" placeholder="Password">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">With tooltip</p>
+							</div>
+						</div>
+						<div class="form-group has-success">
+							<label class="col-md-2 control-label">Input Addon Success</label>
+							<div class="col-md-8">
+								<div class="input-group input-icon right">
+									<span class="input-group-addon">
+										<i class="fa fa-envelope-o"></i>
+									</span>
+								    <input id="email" class="form-control1" type="text" placeholder="Email Address">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">Email is valid!</p>
+							</div>
+						</div>
+						<div class="form-group has-error">
+							<label class="col-md-2 control-label">Input Addon Error</label>
+							<div class="col-md-8">
+								<div class="input-group input-icon right">
+									<span class="input-group-addon">
+										<i class="fa fa-key"></i>
+									</span>
+									<input type="password" class="form-control1" placeholder="Password">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">Error!</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Checkbox Addon</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<div class="input-group-addon"><input type="checkbox"></div>
+									<input type="text" class="form-control1">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Checkbox Addon</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<input type="text" class="form-control1">
+									<div class="input-group-addon"><input type="checkbox"></div>
+
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">Checkbox on right</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Radio Addon</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<div class="input-group-addon"><input type="radio"></div>
+									<input type="text" class="form-control1">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Radio Addon</label>
+							<div class="col-md-8">
+								<div class="input-group">
+									<input type="text" class="form-control1">
+									<div class="input-group-addon"><input type="radio"></div>
+
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">Radio on right</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Input Processing</label>
+							<div class="col-md-8">
+								<div class="input-icon right spinner">
+									<i class="fa fa-fw fa-spin fa-spinner"></i>
+									<input id="email" class="form-control1" type="text" placeholder="Processing...">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<p class="help-block">Processing right</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label">Static Paragraph</label>
+							<div class="col-md-8">
+								<p class="form-control1 m-n">email@example.com</p>
+							</div>
+						</div>
+						<div class="form-group mb-n">
+							<label class="col-md-2 control-label">Readonly</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control1" placeholder="Readonly" readonly="">
+							</div>
+						</div>
+					</form>
+	</div>
+	-->
+	<div class="bs-example" data-example-id="form-validation-states-with-icons">
+		<!--
+    <form>
+      <div class="form-group has-success has-feedback">
+        <label class="control-label" for="inputSuccess2">Input with success</label>
+        <input type="text" class="form-control1" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+      </div>
+      <div class="form-group has-warning has-feedback">
+        <label class="control-label" for="inputWarning2">Input with warning</label>
+        <input type="text" class="form-control1" id="inputWarning2" aria-describedby="inputWarning2Status">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+        <span id="inputWarning2Status" class="sr-only">(warning)</span>
+      </div>
+      <div class="form-group has-error has-feedback">
+        <label class="control-label" for="inputError2">Input with error</label>
+        <input type="text" class="form-control1" id="inputError2" aria-describedby="inputError2Status">
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <span id="inputError2Status" class="sr-only">(error)</span>
+      </div>
+      <div class="form-group has-success has-feedback">
+        <label class="control-label" for="inputGroupSuccess1">Input group with success</label>
+        <div class="input-group">
+          <span class="input-group-addon">@</span>
+          <input type="text" class="form-control1" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+        </div>
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+        <span id="inputGroupSuccess1Status" class="sr-only">(success)</span>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" id="exampleInputFile">
+        <p class="help-block">Example block-level help text here.</p>
+      </div>
+      <div class="panel-footer">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<button class="btn-success btn">Submit</button>
+				<button class="btn-default btn">Cancel</button>
+				<button class="btn-inverse btn">Reset</button>
+			</div>
+		</div>
+	 </div>
+    </form>
+    -->
+  </div>
+
+  	</div>
+  <div class="copy_layout">
+      <p>Copyright &copy; 2018.Company name All rights reserved.Create by Netbin.</p>
+  </div>
+  </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="{% static 'css/custom.css' %}" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'js/metisMenu.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
